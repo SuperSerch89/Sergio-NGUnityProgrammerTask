@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      catrobotMask_0: 1892427018023344795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
