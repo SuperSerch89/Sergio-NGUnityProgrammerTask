@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 02521da158feadf40bdd6c413df35b5f
+guid: 6b48862b63dc09a44b4f989eeb855e03
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8582552526593410060
-    second: bluecheese1_0
+      213: -5537491725623559729
+    second: jetpack2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bluecheese1_0
+      name: jetpack2_0
       rect:
         serializedVersion: 2
-        x: 108
-        y: 78
-        width: 275
-        height: 313
+        x: 123
+        y: 35
+        width: 482
+        height: 650
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c044bb5fc0a5b1770800000000000000
-      internalID: 8582552526593410060
+      spriteID: fc9fa8b4d90e623b0800000000000000
+      internalID: -5537491725623559729
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bluecheese1_0: 8582552526593410060
+      jetpack2_0: -5537491725623559729
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

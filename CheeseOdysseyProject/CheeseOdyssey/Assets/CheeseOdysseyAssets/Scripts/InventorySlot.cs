@@ -3,16 +3,29 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    private InventoryItem itemInSlot = null;
+    #region SerializedFields
+    [SerializeField] private SlotSavedType slotType = SlotSavedType.Inventory;
+    [SerializeField] private ItemType itemType = ItemType.Material;
+    [SerializeField] private int slotId = -1;
+    #endregion
+    #region Private Fields
+    protected InventoryItem itemInSlot = null;
+    #endregion
+    #region Accessors
+    public SlotSavedType SlotType { get { return slotType; } }
+    public ItemType ItemType { get { return itemType; } }
+    public int SlotId { get {  return slotId; } }
+    #endregion
 
+    #region Unity Handlers
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
-
         InventoryItem droppedItem = eventData.pointerDrag.GetComponent<InventoryItem>();
         if (droppedItem == null) { return; }
-        InventorySlot originalSlot = droppedItem.SlotAssigned;
+        if (itemType != ItemType.Material && itemType != droppedItem.ItemSO.itemType) { return; }
 
+        InventorySlot originalSlot = droppedItem.SlotAssigned;
         if (itemInSlot == null)
         {
             SetItemInSlot(droppedItem);
@@ -22,8 +35,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         SetItemInSlot(droppedItem);
         originalSlot.SetItemInSlot(tempItem);
     }
-
-    public void SetItemInSlot(InventoryItem newItem)
+    #endregion
+    #region Public Methods
+    public virtual void SetItemInSlot(InventoryItem newItem)
     {
         if (newItem == null) return;
         if (newItem.SlotAssigned != null) { newItem.SlotAssigned.ClearSlot(); }
@@ -34,9 +48,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         itemInSlot.transform.SetParent(transform);
         itemInSlot.transform.localPosition = Vector3.zero;
     }
-    public void ClearSlot()
-    {
-        itemInSlot = null;
-    }
+    public virtual void ClearSlot() => itemInSlot = null;
     public InventoryItem GetItem() => itemInSlot;
+    #endregion
 }

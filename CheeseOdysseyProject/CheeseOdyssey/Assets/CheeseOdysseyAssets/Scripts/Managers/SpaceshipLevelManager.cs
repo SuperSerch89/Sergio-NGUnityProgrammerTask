@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class SpaceshipLevelManager : LevelManager
 {
+    #region Overriden Methods
     public override void StartScene()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Starting spaceship scene");
+        base.StartScene();
     }
+    #endregion
 }

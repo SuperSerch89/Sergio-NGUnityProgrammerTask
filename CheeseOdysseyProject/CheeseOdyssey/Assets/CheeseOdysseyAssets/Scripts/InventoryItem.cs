@@ -4,15 +4,20 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Image image = null;
+    #region SerializedFields
+    [SerializeField] private Image iconImage = null;
+    [SerializeField][ReadOnly] private ItemID itemID = ItemID.Empty;
+    #endregion
+    #region Private Fields
+    private Item itemSO = null;
+    #endregion
+    #region Accessors
     public Transform ParentOnDrag { get; set; } = null;
     public InventorySlot SlotAssigned { get; set; } = null;
+    public Item ItemSO { get {  return itemSO; } }
+    #endregion
 
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-    }
-
+    #region Unity Handlers
     public void OnBeginDrag(PointerEventData eventData)
     {
         ParentOnDrag = transform.parent;
@@ -20,18 +25,23 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (SlotAssigned != null) { SlotAssigned.ClearSlot(); }
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
-        image.raycastTarget = false;
+        iconImage.raycastTarget = false;
     }
-
     public void OnDrag(PointerEventData eventData) => transform.position = Input.mousePosition;
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.SetParent(ParentOnDrag);
         transform.localPosition = Vector3.zero;
-        image.raycastTarget = true;
+        iconImage.raycastTarget = true;
     }
-    public void SetSlotAssigned(InventorySlot slot)
+    #endregion
+    #region Public Methods
+    public void SetupInventoryItem(Item newItemSO)
     {
-        SlotAssigned = slot;
+        itemSO = newItemSO;
+        iconImage.sprite = itemSO.icon;
+        itemID = itemSO.itemID;
     }
+    public void SetSlotAssigned(InventorySlot slot) => SlotAssigned = slot;
+    #endregion
 }

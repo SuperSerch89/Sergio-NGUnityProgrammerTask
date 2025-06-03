@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 5ab818a3d9257dd458a22b5d35ad7167
+guid: 3b5487d9cf2e40d4892623477809f247
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2723837661283144511
-    second: scrap1_0
+      213: -2815921175796865624
+    second: greengel1_0
   - first:
-      213: -6004946281999963810
-    second: scrap1_1
+      213: 7703996573054726533
+    second: greengel1_1
   - first:
-      213: 5797116337489934508
-    second: scrap1_2
+      213: -8485270858434581028
+    second: greengel1_2
   - first:
-      213: 7988539095579558181
-    second: scrap1_3
+      213: 6667006262824573758
+    second: greengel1_3
   - first:
-      213: 8240594227840750868
-    second: scrap1_4
+      213: -6167683906824135073
+    second: greengel1_4
   - first:
-      213: -7116258297688952039
-    second: scrap1_5
+      213: 5810605319124758596
+    second: greengel1_5
   - first:
-      213: 3622792218016898459
-    second: scrap1_6
+      213: -5598561715718807225
+    second: greengel1_6
   - first:
-      213: 1009263403344428877
-    second: scrap1_7
+      213: 5655016292710782618
+    second: greengel1_7
   - first:
-      213: -1795252904253567240
-    second: scrap1_8
+      213: 8877104161497803004
+    second: greengel1_8
   - first:
-      213: 5435404054869229241
-    second: scrap1_9
+      213: -5197553093641017183
+    second: greengel1_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,13 +127,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: scrap1_0
+      name: greengel1_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 408
-        width: 19
-        height: 19
+        x: 285
+        y: 698
+        width: 23
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1cc236d141cf23ad0800000000000000
-      internalID: -2723837661283144511
+      spriteID: 8a5a0292c96dbe8d0800000000000000
+      internalID: -2815921175796865624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_1
+      name: greengel1_1
       rect:
         serializedVersion: 2
-        x: 57
-        y: 284
-        width: 11
-        height: 11
+        x: 500
+        y: 700
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e59e61e0c252aaca0800000000000000
-      internalID: -6004946281999963810
+      spriteID: 581f0cfc0181aea60800000000000000
+      internalID: 7703996573054726533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_2
+      name: greengel1_2
       rect:
         serializedVersion: 2
-        x: 78
-        y: 64
-        width: 335
-        height: 342
+        x: 581
+        y: 647
+        width: 55
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca873b1389e737050800000000000000
-      internalID: 5797116337489934508
+      spriteID: cdd68047c134e3a80800000000000000
+      internalID: -8485270858434581028
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_3
+      name: greengel1_3
       rect:
         serializedVersion: 2
-        x: 42
-        y: 166
-        width: 34
-        height: 27
+        x: 61
+        y: 552
+        width: 22
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 521075a7bfdfcde60800000000000000
-      internalID: 7988539095579558181
+      spriteID: e3b96fa6fd6f58c50800000000000000
+      internalID: 6667006262824573758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_4
+      name: greengel1_4
       rect:
         serializedVersion: 2
-        x: 43
-        y: 77
-        width: 76
-        height: 72
+        x: 102
+        y: 571
+        width: 33
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +230,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41515982ac87c5270800000000000000
-      internalID: 8240594227840750868
+      spriteID: f5e9ade1a2cf76aa0800000000000000
+      internalID: -6167683906824135073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_5
+      name: greengel1_5
       rect:
         serializedVersion: 2
-        x: 49
-        y: 64
-        width: 26
-        height: 27
+        x: 114
+        y: 39
+        width: 587
+        height: 635
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,20 +252,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 913f25428c8fd3d90800000000000000
-      internalID: -7116258297688952039
+      spriteID: 4403d6870ca63a050800000000000000
+      internalID: 5810605319124758596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_6
+      name: greengel1_6
       rect:
         serializedVersion: 2
-        x: 108
-        y: 57
-        width: 85
-        height: 48
+        x: 702
+        y: 534
+        width: 64
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,20 +274,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9d52f1f35eb64230800000000000000
-      internalID: 3622792218016898459
+      spriteID: 741aa7138c9ed42b0800000000000000
+      internalID: -5598561715718807225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_7
+      name: greengel1_7
       rect:
         serializedVersion: 2
-        x: 262
-        y: 56
-        width: 26
-        height: 28
+        x: 692
+        y: 362
+        width: 41
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,20 +296,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4f7521d7bf910e00800000000000000
-      internalID: 1009263403344428877
+      spriteID: a96921e4b57aa7e40800000000000000
+      internalID: 5655016292710782618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_8
+      name: greengel1_8
       rect:
         serializedVersion: 2
-        x: 393
-        y: 41
-        width: 20
-        height: 20
+        x: 91
+        y: 259
+        width: 43
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,20 +318,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fe4af7cefaf517e0800000000000000
-      internalID: -1795252904253567240
+      spriteID: cf8e734b33fc13b70800000000000000
+      internalID: 8877104161497803004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scrap1_9
+      name: greengel1_9
       rect:
         serializedVersion: 2
-        x: 430
-        y: 14
-        width: 15
-        height: 10
+        x: 719
+        y: 192
+        width: 23
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,8 +340,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9beb23d903f6e6b40800000000000000
-      internalID: 5435404054869229241
+      spriteID: 1a86b48cff49ed7b0800000000000000
+      internalID: -5197553093641017183
       vertices: []
       indices: 
       edges: []
@@ -360,16 +360,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      scrap1_0: -2723837661283144511
-      scrap1_1: -6004946281999963810
-      scrap1_2: 5797116337489934508
-      scrap1_3: 7988539095579558181
-      scrap1_4: 8240594227840750868
-      scrap1_5: -7116258297688952039
-      scrap1_6: 3622792218016898459
-      scrap1_7: 1009263403344428877
-      scrap1_8: -1795252904253567240
-      scrap1_9: 5435404054869229241
+      greengel1_0: -2815921175796865624
+      greengel1_1: 7703996573054726533
+      greengel1_2: -8485270858434581028
+      greengel1_3: 6667006262824573758
+      greengel1_4: -6167683906824135073
+      greengel1_5: 5810605319124758596
+      greengel1_6: -5598561715718807225
+      greengel1_7: 5655016292710782618
+      greengel1_8: 8877104161497803004
+      greengel1_9: -5197553093641017183
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

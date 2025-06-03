@@ -29,7 +29,16 @@
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "21ce5062-2b0b-4cf3-badd-1277915b928e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -253,6 +262,28 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40792d1e-7e80-4af8-880d-9d0621f4e491",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b1da6f8-259b-4350-ac90-c9bb7b7fd8a6",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -324,19 +355,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TrackedDevicePosition",
-                    "type": "PassThrough",
-                    "id": "24908448-c609-4bc3-a128-ea258674378a",
-                    "expectedControlType": "Vector3",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TrackedDeviceOrientation",
-                    "type": "PassThrough",
-                    "id": "9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be",
-                    "expectedControlType": "Quaternion",
+                    "name": "OnCloseInventory",
+                    "type": "Button",
+                    "id": "4ef7580b-7a5a-4416-88f8-7e0981045ffe",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -730,23 +752,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7236c0d9-6ca3-47cf-a6ee-a97f5b59ea77",
-                    "path": "<XRController>/devicePosition",
+                    "id": "2837895d-3a8d-40b5-8697-4199e8da5e8f",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "XR",
-                    "action": "TrackedDevicePosition",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "OnCloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "23e01e3a-f935-4948-8d8b-9bcac77714fb",
-                    "path": "<XRController>/deviceRotation",
+                    "id": "31894135-0f5e-4fc1-b096-4288efe000ee",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "XR",
-                    "action": "TrackedDeviceOrientation",
+                    "groups": ";Gamepad",
+                    "action": "OnCloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

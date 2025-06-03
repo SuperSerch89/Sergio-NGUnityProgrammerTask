@@ -15,6 +15,7 @@ public class MouseController : Singleton<MouseController>
     [SerializeField] private SpriteRenderer playerArtRenderer = null;
     [SerializeField] private Animator animator = null;
     [SerializeField] private string runningBoolean = "Running";
+    [SerializeField] private Transform helmetTransform;
     #endregion
 
     #region Private Fields
@@ -22,6 +23,8 @@ public class MouseController : Singleton<MouseController>
     private int runningBooleanHash = 0;
     private bool isMoving = false;
     private Vector2 currentVelocity = Vector2.zero;
+    private InventoryController inventoryController = null;
+    private PlayerInput playerInput = null;
     #endregion
 
     #region Unity Life Cycle
@@ -29,6 +32,8 @@ public class MouseController : Singleton<MouseController>
     {
         base.Awake();
         rb = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<PlayerInput>();
+        inventoryController = GetComponent<InventoryController>();
         Initialize();
     }
     private void Update()
@@ -42,10 +47,13 @@ public class MouseController : Singleton<MouseController>
     }
     #endregion
 
+    #region Public Methods
     public void Initialize()
     {
         runningBooleanHash = Animator.StringToHash(runningBoolean);
     }
+    #endregion
+    #region Private Methods
     private void Move()
     {
         isMoving = moveInput != Vector2.zero;
@@ -72,14 +80,22 @@ public class MouseController : Singleton<MouseController>
     }
     private void VisualsFlip()
     {
-        if (moveInput.x > 0) { playerArtRenderer.flipX = false; }
-        else if (moveInput.x < 0) { playerArtRenderer.flipX = true; }
+        if (moveInput.x > 0)
+        {
+            playerArtRenderer.flipX = false;
+            helmetTransform.localScale = Vector2.one;
+        }
+        else if (moveInput.x < 0)
+        {
+            playerArtRenderer.flipX = true;
+            helmetTransform.localScale = new Vector2(-1, 1);
+        }
     }
     private void Animations()
     {
         animator.SetBool(runningBooleanHash, isMoving);
     }
-
+    #endregion
     #region PlayerInput
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -88,7 +104,28 @@ public class MouseController : Singleton<MouseController>
             moveInput = context.ReadValue<Vector2>();
         }
     }
+    public void OnOpenInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            LevelManager.Instance.ShowInventory(true);
+        }
+    }
+    public void OnCloseInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            LevelManager.Instance.ShowInventory(false);
+        }
+    }
+    public void SwitchActionMap(InputMaps inputMap)
+    {
+        playerInput.SwitchCurrentActionMap(inputMap.ToString());
+    }
     #endregion
 
+    #region Enums
     private enum MovementMode { Normal, Jetpack }
+    public enum InputMaps { Gameplay, UI}
+    #endregion
 }
