@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     #region SerializedFields
     [SerializeField] private Image iconImage = null;
     [SerializeField][ReadOnly] private ItemID itemID = ItemID.Empty;
+    [SerializeField] private Text quantityText = null;
     #endregion
     #region Private Fields
     private Item itemSO = null;
@@ -34,6 +35,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.localPosition = Vector3.zero;
         iconImage.raycastTarget = true;
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UIManager.Instance.ShowTooltip(true, itemSO.itemName);
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIManager.Instance.ShowTooltip(false);
+    }
     #endregion
     #region Public Methods
     public void SetupInventoryItem(Item newItemSO)
@@ -41,6 +50,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         itemSO = newItemSO;
         iconImage.sprite = itemSO.icon;
         itemID = itemSO.itemID;
+    }
+    public void SetQuantity(int newQuantity)
+    {
+        quantityText.text = newQuantity.ToString();
+        quantityText.gameObject.SetActive(newQuantity > 1 ? true : false);
     }
     public void SetSlotAssigned(InventorySlot slot) => SlotAssigned = slot;
     #endregion

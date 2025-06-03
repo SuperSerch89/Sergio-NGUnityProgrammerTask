@@ -1,5 +1,6 @@
 using NicoUtilities;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
@@ -8,6 +9,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject inventoryPanel = null;
     [SerializeField] private GameObject inventoryItemPrefab = null;
     [SerializeField] private List<Item> allItems = null;
+    [SerializeField] private Tooltip tooltip = null;
     #endregion
     #region Private Fields
     private Dictionary<int, InventorySlot> inventorySlots = new Dictionary<int, InventorySlot>();
@@ -54,6 +56,7 @@ public class UIManager : Singleton<UIManager>
                 continue;
             }
             newInventoryItem.SetupInventoryItem(itemSO);
+            newInventoryItem.SetQuantity(item.itemData.quantity);
 
             switch (item.savedSlotType)
             {
@@ -66,6 +69,19 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
+    public void UpdateItemQuantity(InventoryItemData updatedInventoryItemData)
+    {
+        int newQuantity = updatedInventoryItemData.itemData.quantity;
+        switch (updatedInventoryItemData.savedSlotType)
+        {
+            case SlotSavedType.Inventory:
+                inventorySlots[updatedInventoryItemData.slotUsed].GetItem().SetQuantity(newQuantity);
+                break;
+            default:
+                equippedSlots[updatedInventoryItemData.slotUsed].GetItem().SetQuantity(newQuantity);
+                break;
+        }
+    }
     public void OpenInventory()
     {
         inventoryPanel.SetActive(true);
@@ -74,6 +90,15 @@ public class UIManager : Singleton<UIManager>
     {
         inventoryPanel.SetActive(false);
         LevelManager.Instance.ShowInventory(false);
+        ShowTooltip(false);
     }
+    public int GetFreeSlot()
+    {
+        var freeSlot = inventorySlots.FirstOrDefault(item => item.Value.GetItem() == null);
+        if (freeSlot.Value != null) { return freeSlot.Key; }
+        Debug.LogWarning("No free inventory slots available.");
+        return -1;
+    }
+    public void ShowTooltip(bool state, string itemName = "") => tooltip.Show(state, itemName);
     #endregion
 }

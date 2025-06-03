@@ -4,6 +4,24 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private List<InventoryItemData> inventory = new List<InventoryItemData>();
+
+    public void AddItem(ItemData addedItem)
+    {
+        InventoryItemData foundItemInInventory = inventory.Find(inventoryItem => inventoryItem.itemData.itemID == addedItem.itemID);
+        if (foundItemInInventory == null)
+        {
+            int freeInventorySlot = UIManager.Instance.GetFreeSlot();
+            foundItemInInventory = new InventoryItemData(addedItem, SlotSavedType.Inventory, freeInventorySlot);
+            UIManager.Instance.SetupInventoryItems(new List<InventoryItemData> { foundItemInInventory });
+            inventory.Add(foundItemInInventory);
+        }
+        else
+        {
+            foundItemInInventory.itemData.quantity += addedItem.quantity;
+            UIManager.Instance.UpdateItemQuantity(foundItemInInventory);
+
+        }
+    }
 }
 
 [System.Serializable]

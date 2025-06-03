@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class LevelManager : Singleton<LevelManager>
 {
+    #region SerializedFields
+    [SerializeField] private float UIOpenDelay = 0.2f;
+    #endregion
     #region Private Methods
     private bool openingInventory = false;
     #endregion
@@ -47,7 +50,7 @@ public abstract class LevelManager : Singleton<LevelManager>
     private IEnumerator OpeningDelayRountine()
     {
         openingInventory = true;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(UIOpenDelay);
         openingInventory = false;
     }
     #endregion
