@@ -2,6 +2,7 @@ using NicoUtilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class LevelManager : Singleton<LevelManager>
 {
@@ -44,6 +45,11 @@ public abstract class LevelManager : Singleton<LevelManager>
             UIManager.Instance.CloseInventory();
             MouseController.Instance.SwitchActionMap(MouseController.InputMaps.Gameplay);
         }
+    }
+    public void ShowDialogue(Dialogue dialogue, UnityAction OnDialogueFinishedShowing = null)
+    {
+        string resultText = DialogueCSVLoader.Instance.GetDialogueText(dialogue.dialogueID);
+        UIManager.Instance.ShowDialogue(resultText, dialogue, OnDialogueFinishedShowing);
     }
     #endregion
     #region Coroutines

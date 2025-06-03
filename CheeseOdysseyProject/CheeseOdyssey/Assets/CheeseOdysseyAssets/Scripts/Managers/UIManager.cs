@@ -1,19 +1,34 @@
 using NicoUtilities;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIManager : Singleton<UIManager>
 {
     #region Serialized Fields
+    [Header("Inventory")]
     [SerializeField] private GameObject inventoryPanel = null;
     [SerializeField] private GameObject inventoryItemPrefab = null;
     [SerializeField] private List<Item> allItems = null;
     [SerializeField] private Tooltip tooltip = null;
+    [Header("Dialogues")]
+    [SerializeField] private Animator dialoguesAnimator = null;
+    [SerializeField] private TextMeshProUGUI dialogueNameLabel = null;
+    [SerializeField] private TextMeshProUGUI dialogueLabel = null;
+    [SerializeField] private string dialogueOpenBool= "open";
+    [SerializeField] private string dialogueCloseBool= "close";
+    [SerializeField] private float showingDuration = 1f;
     #endregion
     #region Private Fields
     private Dictionary<int, InventorySlot> inventorySlots = new Dictionary<int, InventorySlot>();
     private Dictionary<int, InventorySlot> equippedSlots = new Dictionary<int, InventorySlot>();
+    private Coroutine currentRoutine;
+    #endregion
+    #region Delegates
+    public UnityAction DialogueFinishedCallback = null;
     #endregion
 
     #region Unity Overriden Methods
@@ -23,7 +38,7 @@ public class UIManager : Singleton<UIManager>
         GetSlots();
     }
     #endregion
-    #region Private Methods
+    #region Inventory Methods
     private void GetSlots()
     {
         foreach (InventorySlot slot in GetComponentsInChildren<InventorySlot>(true))
@@ -39,8 +54,6 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
-    #endregion
-    #region Public Methods
     public void SetupInventoryItems(List<InventoryItemData> inventoryItems)
     {
         foreach (InventoryItemData item in inventoryItems)
@@ -99,6 +112,33 @@ public class UIManager : Singleton<UIManager>
         Debug.LogWarning("No free inventory slots available.");
         return -1;
     }
+    #endregion
+    #region Dialogue Methods
+    public void ShowDialogue(string text, Dialogue dialogue, UnityAction OnDialogueFinishedShowing = null)
+    {
+        if (currentRoutine != null) { StopCoroutine(currentRoutine); }
+        DialogueFinishedCallback = OnDialogueFinishedShowing;
+
+        dialoguesAnimator.SetBool(dialogueOpenBool, true);
+        dialoguesAnimator.SetBool(dialogueCloseBool, false);
+        dialogueNameLabel.text = dialogue.characterName;
+        dialogueLabel.text = text;
+        currentRoutine = StartCoroutine(DialogueCoroutine());
+    }
+    private void CloseDialogue()
+    {
+        dialoguesAnimator.SetBool(dialogueOpenBool, false);
+        dialoguesAnimator.SetBool(dialogueCloseBool, true);
+        DialogueFinishedCallback?.Invoke();
+    }
+    #endregion
     public void ShowTooltip(bool state, string itemName = "") => tooltip.Show(state, itemName);
+    #region Coroutines
+    private IEnumerator DialogueCoroutine()
+    {
+        yield return new WaitForSeconds(showingDuration);
+        currentRoutine = null;
+        CloseDialogue();
+    }
     #endregion
 }
