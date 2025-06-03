@@ -16,15 +16,17 @@ public class MouseController : Singleton<MouseController>
     [SerializeField] private Animator animator = null;
     [SerializeField] private string runningBoolean = "Running";
     [SerializeField] private Transform helmetTransform;
+    [Header("Interactions")]
+    [SerializeField] private InteractableDetector interactableDetector = null;
     #endregion
 
     #region Private Fields
     private Rigidbody2D rb = null;
+    private InventoryController inventoryController = null;
+    private PlayerInput playerInput = null;
     private int runningBooleanHash = 0;
     private bool isMoving = false;
     private Vector2 currentVelocity = Vector2.zero;
-    private InventoryController inventoryController = null;
-    private PlayerInput playerInput = null;
     #endregion
 
     #region Unity Life Cycle
@@ -112,24 +114,26 @@ public class MouseController : Singleton<MouseController>
     }
     public void OnOpenInventory(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            LevelManager.Instance.ShowInventory(true);
-        }
+        if (!context.started) { return; }
+        LevelManager.Instance.ShowInventory(true);
     }
     public void OnCloseInventory(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            LevelManager.Instance.ShowInventory(false);
-        }
+        if (!context.started) { return; }
+        LevelManager.Instance.ShowInventory(false);
+    }
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.started) { return; }
+        var interactable = interactableDetector.GetClosestInteractable();
+        if (interactable == null) { return; }
+        interactable.Interact();
     }
     public void SwitchActionMap(InputMaps inputMap)
     {
         playerInput.SwitchCurrentActionMap(inputMap.ToString());
     }
     #endregion
-
     #region Enums
     private enum MovementMode { Normal, Jetpack }
     public enum InputMaps { Gameplay, UI}
