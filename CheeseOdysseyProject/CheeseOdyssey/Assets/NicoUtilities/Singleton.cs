@@ -1,24 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 namespace NicoUtilities
 {
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public static T Instance { get; private set; }
+        private static T _instance;
+        public static T Instance {
+            get {
+                if (_instance == null)
+                    _instance = FindFirstObjectByType<T>();
 
-        public static bool isInitialized {
-            get { return Instance != null; }
+                if (_instance == null)
+                    Debug.LogError($"Singleton<{typeof(T)}> instance not found in scene!");
+
+                return _instance;
+            }
+            private set {
+                _instance = value;
+            }
         }
+
+        public static bool isInitialized => Instance != null;
 
         protected virtual void Awake()
         {
-            if (Instance == null)
+            if (_instance == null)
             {
-                Instance = (T)this;
+                _instance = (T)this;
             }
-            else
+            else if (_instance != this)
             {
                 Destroy(gameObject);
             }

@@ -12,6 +12,9 @@ public abstract class LevelManager : Singleton<LevelManager>
     [ReadOnly]private CurrentPanelOpened currentPanelOpened = CurrentPanelOpened.None;
     private bool openingPanel = false;
     #endregion
+    #region Delegates
+    public UnityAction OnSceneStarted = null;
+    #endregion
 
     #region Public Methods
     public virtual void StartScene()
@@ -19,6 +22,7 @@ public abstract class LevelManager : Singleton<LevelManager>
         currentPanelOpened = CurrentPanelOpened.None;
         MouseController.Instance.InventoryController.SetupInventory(GameManager.Instance.GameData.inventory);
         UIManager.Instance.SetupInventoryItems(GameManager.Instance.GameData.inventory);
+        OnSceneStarted?.Invoke();
     }
     public void ShowInventory(bool stateOn)
     {
@@ -77,6 +81,7 @@ public abstract class LevelManager : Singleton<LevelManager>
     }
     public InventoryController GetNibblesInventory() => MouseController.Instance.InventoryController;
     public void NibblesEquipmentChange(ItemType itemType, ItemID itemID) => MouseController.Instance.ChangeEquipment(itemType, itemID);
+    public int CheckNibblesItemQuantity(ItemID itemID) => MouseController.Instance.InventoryController.GetItemQuantity(itemID);
     #endregion
     #region Coroutines
     private IEnumerator OpeningDelayRountine()
