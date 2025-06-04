@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
@@ -10,12 +11,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     #endregion
     #region Private Fields
     protected InventoryItem itemInSlot = null;
+    private RectTransform rectTransform = null;
     #endregion
     #region Accessors
     public SlotSavedType SlotType { get { return slotType; } }
     public ItemType ItemType { get { return itemType; } }
     public int SlotId { get {  return slotId; } }
     #endregion
+
+    private void Awake() => rectTransform = GetComponent<RectTransform>();
 
     #region Unity Handlers
     public void OnDrop(PointerEventData eventData)

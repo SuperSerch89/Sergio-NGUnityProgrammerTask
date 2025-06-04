@@ -11,12 +11,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     #endregion
     #region Private Fields
     private Item itemSO = null;
+    private RectTransform rect = null;
     #endregion
     #region Accessors
     public Transform ParentOnDrag { get; set; } = null;
     public InventorySlot SlotAssigned { get; set; } = null;
     public Item ItemSO { get {  return itemSO; } }
     #endregion
+
+    private void Awake() => rect = GetComponent<RectTransform>();
 
     #region Unity Handlers
     public void OnBeginDrag(PointerEventData eventData)
@@ -33,15 +36,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(ParentOnDrag);
         transform.localPosition = Vector3.zero;
         iconImage.raycastTarget = true;
+        rect.localScale = Vector3.one;
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        UIManager.Instance.ShowTooltip(true, itemSO.itemName);
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        UIManager.Instance.ShowTooltip(false);
-    }
+    public void OnPointerEnter(PointerEventData eventData) => UIManager.Instance.ShowTooltip(true, itemSO.itemName);
+    public void OnPointerExit(PointerEventData eventData) => UIManager.Instance.ShowTooltip(false);
     #endregion
     #region Public Methods
     public void SetupInventoryItem(Item newItemSO)

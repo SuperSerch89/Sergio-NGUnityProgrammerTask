@@ -36,7 +36,7 @@ public class RandomPlacer : MonoBehaviour
             while (avoidOverlap && !IsPositionValid(position) && safetyCounter < 100);
 
             placedPositions.Add(position);
-            Instantiate(prefab, new Vector3(position.x, position.y, 0f), Quaternion.identity);
+            Instantiate(prefab, new Vector3(position.x, position.y, 0f), Quaternion.identity).transform.SetParent(transform);
         }
     }
 

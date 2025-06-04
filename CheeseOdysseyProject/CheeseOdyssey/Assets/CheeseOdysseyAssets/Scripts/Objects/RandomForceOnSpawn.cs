@@ -5,9 +5,9 @@ public class RandomForceOnSpawn : MonoBehaviour
 {
     [SerializeField] private float minForce = 2f;
     [SerializeField] private float maxForce = 5f;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb = null;
 
-    private void Awake() => rb = GetComponent<Rigidbody2D>();
+    private void Awake() { rb = GetComponent<Rigidbody2D>();}
     private void Start() => ApplyRandomForce();
     private void ApplyRandomForce()
     {
