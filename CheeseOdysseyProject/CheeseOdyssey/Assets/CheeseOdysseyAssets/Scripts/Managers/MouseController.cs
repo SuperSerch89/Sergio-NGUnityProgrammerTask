@@ -61,6 +61,26 @@ public class MouseController : Singleton<MouseController>
     {
         runningBooleanHash = Animator.StringToHash(runningBoolean);
     }
+    public void ChangeEquipment(ItemType itemType, ItemID itemID)
+    {
+        EquipmentResolver equipmentFound = equipmentResolvers.FirstOrDefault(resolver => resolver.itemType == itemType);
+        if (equipmentFound == null)
+        {
+            Debug.LogError($"Couldn't find equipment resolver with type {itemType}");
+            return;
+        }
+        ItemLabel labelFound = equipmentFound.labels.FirstOrDefault(itemLabel => itemLabel.itemID == itemID);
+        if (labelFound == null)
+        {
+            Debug.LogError($"Couldn't find equipment item label with itemID {itemID}");
+            return;
+        }
+        equipmentFound.spriteResolver.SetCategoryAndLabel(equipmentFound.itemType.ToString(), labelFound.label.ToString());
+    }
+    public void ChangeFlyMode(MovementMode newMode)
+    {
+        currentMode = newMode;
+    }
     #endregion
     #region Private Methods
     private void Move()
@@ -104,22 +124,6 @@ public class MouseController : Singleton<MouseController>
     {
         animator.SetBool(runningBooleanHash, isMoving);
     }
-    public void ChangeEquipment(ItemType itemType, ItemID itemID)
-    {
-        EquipmentResolver equipmentFound = equipmentResolvers.FirstOrDefault(resolver => resolver.itemType == itemType);
-        if (equipmentFound == null) 
-        {
-            Debug.LogError($"Couldn't find equipment resolver with type {itemType}");
-            return;
-        }
-        ItemLabel labelFound = equipmentFound.labels.FirstOrDefault(itemLabel => itemLabel.itemID == itemID);
-        if (labelFound == null)
-        {
-            Debug.LogError($"Couldn't find equipment item label with itemID {itemID}");
-            return;
-        }
-        equipmentFound.spriteResolver.SetCategoryAndLabel(equipmentFound.itemType.ToString(), labelFound.label.ToString());
-    }
     #endregion
     #region PlayerInput
     public void OnMove(InputAction.CallbackContext context)
@@ -152,7 +156,7 @@ public class MouseController : Singleton<MouseController>
     }
     #endregion
     #region Enums
-    private enum MovementMode { Normal, Jetpack }
+    public enum MovementMode { Normal, Jetpack }
     public enum InputMaps { Gameplay, UI}
     public enum EquippableLabel
     {

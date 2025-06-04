@@ -49,9 +49,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2871735259200053935, guid: 86a5f9c85ca98fa47adf82301fbf952b, type: 3}
+      propertyPath: itemData.itemID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2871735259200053935, guid: 86a5f9c85ca98fa47adf82301fbf952b, type: 3}
       propertyPath: itemData.quantity
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5859520224799755869, guid: 86a5f9c85ca98fa47adf82301fbf952b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ab818a3d9257dd458a22b5d35ad7167, type: 3}
     - target: {fileID: 7652682783991657320, guid: 86a5f9c85ca98fa47adf82301fbf952b, type: 3}
       propertyPath: m_Name
       value: PickableItemScrap Variant
