@@ -3,13 +3,15 @@ using UnityEngine;
 public class CatShop : MonoBehaviour, IInteractable
 {
     [SerializeField] private Dialogue openShopDialogue = null;
+    [SerializeField] private ShopDataSO shopProductsData = null;
+
     private bool showedDialogue = false;
-    private bool openingShop = false;
+    private bool shopOpened = false;
 
     public void Interact()
     {
-        if (openingShop) { return; }
-        openingShop = true;
+        if (shopOpened) { return; }
+        shopOpened = true;
 
         if (!showedDialogue)
         {
@@ -21,6 +23,10 @@ public class CatShop : MonoBehaviour, IInteractable
     }
     private void OpenShop()
     {
-        Debug.Log("Opening shop");
+        LevelManager.Instance.ShowShop(true, shopProductsData, OnShopClosed);
+    }
+    private void OnShopClosed()
+    {
+        shopOpened = false;
     }
 }

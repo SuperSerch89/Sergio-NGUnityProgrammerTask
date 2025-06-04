@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -21,25 +22,40 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private string dialogueOpenBool= "open";
     [SerializeField] private string dialogueCloseBool= "close";
     [SerializeField] private float showingDuration = 1f;
+    [Header("Shop")]
+    [SerializeField] private GameObject shopPanel = null;
+    [SerializeField] private Transform allProductsTransform = null;
+    [SerializeField] private TextMeshProUGUI productNameLabel = null;
+    [SerializeField] private Image productIconLabel = null;
+    [SerializeField] private TextMeshProUGUI productDescriptionLabel = null;
+    [SerializeField] private List<StoreItemComponent> storeItemComponents = new List<StoreItemComponent>();
+    [SerializeField] private GameObject craftSuccessPanel = null;
+    [SerializeField] private GameObject craftFailedPanel = null;
     #endregion
     #region Private Fields
     private Dictionary<int, InventorySlot> inventorySlots = new Dictionary<int, InventorySlot>();
     private Dictionary<int, InventorySlot> equippedSlots = new Dictionary<int, InventorySlot>();
     private Coroutine currentRoutine;
+    private List<StoreProduct> storeProducts = new List<StoreProduct>();
+    private Item selectedItem = null;
+    private ShopDataSO selectedShopProductsData = null;
+    private Product selectedProduct = null;
     #endregion
     #region Delegates
     public UnityAction DialogueFinishedCallback = null;
+    public UnityAction ShopClosedCallback = null;
     #endregion
 
     #region Unity Overriden Methods
     protected override void Awake()
     {
         base.Awake();
-        GetSlots();
+        GetInventorySlots();
+        GetStoreProductSlots();
     }
     #endregion
     #region Inventory Methods
-    private void GetSlots()
+    private void GetInventorySlots()
     {
         foreach (InventorySlot slot in GetComponentsInChildren<InventorySlot>(true))
         {
@@ -62,12 +78,7 @@ public class UIManager : Singleton<UIManager>
 
             GameObject newItem = Instantiate(inventoryItemPrefab);
             InventoryItem newInventoryItem = newItem.GetComponent<InventoryItem>();
-            Item itemSO = allItems.Find(itemSO => itemSO.itemID == item.itemData.itemID);
-            if (itemSO == null) 
-            {
-                Debug.LogError($"Couldn't find {itemSO.itemID} item scriptable Object.");
-                continue;
-            }
+            Item itemSO = FindItemSO(item.itemData.itemID);
             newInventoryItem.SetupInventoryItem(itemSO);
             newInventoryItem.SetQuantity(item.itemData.quantity);
 
@@ -85,14 +96,31 @@ public class UIManager : Singleton<UIManager>
     public void UpdateItemQuantity(InventoryItemData updatedInventoryItemData)
     {
         int newQuantity = updatedInventoryItemData.itemData.quantity;
+        InventorySlot targetSlot = null;
         switch (updatedInventoryItemData.savedSlotType)
         {
             case SlotSavedType.Inventory:
-                inventorySlots[updatedInventoryItemData.slotUsed].GetItem().SetQuantity(newQuantity);
+                targetSlot = inventorySlots[updatedInventoryItemData.slotUsed];
                 break;
             default:
-                equippedSlots[updatedInventoryItemData.slotUsed].GetItem().SetQuantity(newQuantity);
+                targetSlot = equippedSlots[updatedInventoryItemData.slotUsed];
                 break;
+        }
+        InventoryItem item = targetSlot.GetItem();
+        if (item == null)
+        {
+            Debug.LogWarning($"Tried to update quantity but no item found in slot {updatedInventoryItemData.slotUsed}");
+            return;
+        }
+
+        if (newQuantity <= 0)
+        {
+            Destroy(item.gameObject);
+            targetSlot.ClearSlot();
+        }
+        else
+        {
+            item.SetQuantity(newQuantity);
         }
     }
     public void OpenInventory()
@@ -132,7 +160,119 @@ public class UIManager : Singleton<UIManager>
         DialogueFinishedCallback?.Invoke();
     }
     #endregion
+    #region Shop Methods
+    private void GetStoreProductSlots()
+    {
+        foreach(Transform child in allProductsTransform)
+        {
+            StoreProduct storeProduct = child.GetComponent<StoreProduct>();
+            if (storeProduct == null) { continue; }
+            storeProducts.Add(storeProduct);
+            storeProduct.gameObject.SetActive(false);
+        }
+    }
+    public void OpenShop(ShopDataSO shopProductsData, UnityAction OnShopClosed = null)
+    {
+        ShopClosedCallback = OnShopClosed;
+        SetupShop(shopProductsData);
+        shopPanel.SetActive(true);
+    }
+    public void CloseShop()
+    {
+        shopPanel.SetActive(false);
+        LevelManager.Instance.ShowShop(false);
+        ShowTooltip(false);
+        ShopClosedCallback?.Invoke();
+    }
+    private void SetupShop(ShopDataSO shopProductsData)
+    {
+        foreach (StoreProduct product in storeProducts) { product.gameObject.SetActive(false); }
+        selectedShopProductsData = shopProductsData;
+        for (int i = 0; i < shopProductsData.products.Count; i++)
+        {
+            if (i >= storeProducts.Count)
+            {
+                Debug.LogError("Not enough product slots to place all store items.");
+                break;
+            }
+            Item itemSO = FindItemSO(shopProductsData.products[i].itemData.itemID);
+            storeProducts[i].Setup(itemSO);
+            storeProducts[i].gameObject.SetActive(true);
+        }
+        if(storeProducts.Count > 0)
+        {
+            ShowSelectedProductDetails(storeProducts[0].Item);
+        }
+    }
+    public void ShowSelectedProductDetails(Item itemToShow)
+    {
+        selectedItem = itemToShow;
+        productNameLabel.text = itemToShow.itemName;
+        productIconLabel.sprite = itemToShow.icon;
+        productDescriptionLabel.text = itemToShow.description;
+
+        foreach (StoreItemComponent itemComponent in storeItemComponents) { itemComponent.gameObject.SetActive(false); }
+        Product foundProduct = selectedShopProductsData.products.Find(product => product.itemData.itemID == itemToShow.itemID);
+        if (foundProduct == null)
+        {
+            Debug.LogError("Couldn't find store product "+ itemToShow.itemID +", to show details.");
+            return;
+        }
+        selectedProduct = foundProduct;
+        InventoryController nibblesInventory = LevelManager.Instance.GetNibblesInventory();
+        for (int i = 0; i < selectedProduct.requiredMaterials.Count; i++)
+        {
+            if (i >= storeItemComponents.Count)
+            {
+                Debug.LogError("Not enough storeItemComponents to show all requiredMaterials.");
+                break;
+            }
+            storeItemComponents[i].gameObject.SetActive(true);
+            Item itemSO = FindItemSO(selectedProduct.requiredMaterials[i].itemID);
+            int nibblesHeldComponentQuantity = nibblesInventory.GetItemQuantity(itemSO.itemID);
+            storeItemComponents[i].Setup(selectedProduct.requiredMaterials[i], itemSO.icon, nibblesHeldComponentQuantity);
+        }
+    }
+    public void TryCrafting()
+    {
+        InventoryController nibblesInventory = LevelManager.Instance.GetNibblesInventory();
+        bool craftAvailable = true;
+        List<ItemData> modifiedItemDatas = new List<ItemData>();
+        foreach (ItemData component in selectedProduct.requiredMaterials)
+        {
+            int heldQuantity = nibblesInventory.GetItemQuantity(component.itemID);
+            if (heldQuantity < component.quantity)
+            {
+                craftAvailable = false;
+                break;
+            }
+            modifiedItemDatas.Add(new ItemData(component.itemID, heldQuantity - component.quantity));
+        }
+        if (!craftAvailable)
+        {
+            craftFailedPanel.SetActive(true);
+            return;
+        }
+        craftSuccessPanel.SetActive(true);
+        foreach(ItemData modifiedItem in modifiedItemDatas)
+        {
+            nibblesInventory.ModifyItemQuantity(modifiedItem);
+        }
+        nibblesInventory.AddItem(selectedProduct.itemData);
+        SetupShop(selectedShopProductsData);
+    }
+    #endregion
     public void ShowTooltip(bool state, string itemName = "") => tooltip.Show(state, itemName);
+    private Item FindItemSO(ItemID itemIDSearched)
+    {
+        Item itemSO = allItems.Find(itemSO => itemSO.itemID == itemIDSearched);
+        if (itemSO == null)
+        {
+            Debug.LogError($"Couldn't find {itemIDSearched} item scriptable Object.");
+            return null;
+        }
+        return itemSO;
+    }
     #region Coroutines
     private IEnumerator DialogueCoroutine()
     {

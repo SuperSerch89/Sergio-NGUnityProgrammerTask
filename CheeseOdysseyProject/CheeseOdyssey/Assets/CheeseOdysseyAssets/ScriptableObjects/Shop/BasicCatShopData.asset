@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060cec7ce1c765142b8bc3e501c51a8e, type: 3}
+  m_Name: BasicCatShopData
+  m_EditorClassIdentifier: 
+  products:
+  - itemData:
+      itemID: 101
+      quantity: 1
+    requiredMaterials:
+    - itemID: 1
+      quantity: 10
+    - itemID: 2
+      quantity: 1
+  - itemData:
+      itemID: 201
+      quantity: 1
+    requiredMaterials:
+    - itemID: 3
+      quantity: 5
+    - itemID: 4
+      quantity: 3
+  - itemData:
+      itemID: 202
+      quantity: 1
+    requiredMaterials:
+    - itemID: 3
+      quantity: 5
+    - itemID: 4
+      quantity: 3
+  - itemData:
+      itemID: 203
+      quantity: 1
+    requiredMaterials:
+    - itemID: 3
+      quantity: 5
+    - itemID: 4
+      quantity: 3

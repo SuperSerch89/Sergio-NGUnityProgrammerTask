@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5998a7c5d9b767f4991f673cdf7a9194, type: 3}
-  m_Name: CatShop
+  m_Script: {fileID: 11500000, guid: 02b358bec5dc59a4792b6640353dc8ce, type: 3}
+  m_Name: GreengelItem
   m_EditorClassIdentifier: 
-  dialogueID: 1
-  characterName: Cat
-  dialogueClip: {fileID: 0}
+  itemID: 4
+  itemName: Green Gel
+  description: Green Gel description
+  icon: {fileID: 21300000, guid: 3b5487d9cf2e40d4892623477809f247, type: 3}
+  itemType: 0

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b358bec5dc59a4792b6640353dc8ce, type: 3}
-  m_Name: JetpackImprovedItem
+  m_Script: {fileID: 11500000, guid: 5998a7c5d9b767f4991f673cdf7a9194, type: 3}
+  m_Name: CatShopDialogue
   m_EditorClassIdentifier: 
-  itemID: 101
-  itemName: Improved Jetpack
-  description: Improved Jetpack description
-  icon: {fileID: 21300000, guid: 6b48862b63dc09a44b4f989eeb855e03, type: 3}
-  itemType: 2
+  dialogueID: 1
+  characterName: Robotto Cat
+  dialogueClip: {fileID: 0}

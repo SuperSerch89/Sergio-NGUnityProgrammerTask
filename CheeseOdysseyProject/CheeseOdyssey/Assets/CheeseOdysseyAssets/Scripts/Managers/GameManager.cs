@@ -23,4 +23,10 @@ public class GameManager : Singleton<GameManager>
 public class GameData
 {
     public List<InventoryItemData> inventory = new List<InventoryItemData>();
+    public ShopInventory catShopInventory = new ShopInventory();
+}
+[System.Serializable]
+public class ShopInventory
+{
+    public List<ItemData> shopCraftableItems = new List<ItemData>();
 }

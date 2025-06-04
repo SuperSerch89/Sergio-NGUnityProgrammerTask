@@ -28,6 +28,9 @@ public class MouseController : Singleton<MouseController>
     private bool isMoving = false;
     private Vector2 currentVelocity = Vector2.zero;
     #endregion
+    #region Accessors
+    public InventoryController InventoryController {  get { return inventoryController; } }
+    #endregion
 
     #region Unity Life Cycle
     protected override void Awake()

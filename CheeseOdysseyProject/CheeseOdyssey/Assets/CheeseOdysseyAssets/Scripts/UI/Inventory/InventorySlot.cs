@@ -28,10 +28,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         InventorySlot originalSlot = droppedItem.SlotAssigned;
         if (itemInSlot == null)
         {
+            originalSlot.ClearSlot();
             SetItemInSlot(droppedItem);
             return;
         }
         InventoryItem tempItem = itemInSlot;
+        originalSlot.ClearSlot();
         SetItemInSlot(droppedItem);
         originalSlot.SetItemInSlot(tempItem);
     }
@@ -47,6 +49,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         itemInSlot.ParentOnDrag = transform;
         itemInSlot.transform.SetParent(transform);
         itemInSlot.transform.localPosition = Vector3.zero;
+        LevelManager.Instance.GetNibblesInventory().ChangeItemInventorySlot(itemInSlot.ItemSO, SlotType, SlotId);
     }
     public virtual void ClearSlot() => itemInSlot = null;
     public InventoryItem GetItem() => itemInSlot;

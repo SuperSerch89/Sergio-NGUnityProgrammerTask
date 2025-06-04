@@ -23,7 +23,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         ParentOnDrag = transform.parent;
 
-        if (SlotAssigned != null) { SlotAssigned.ClearSlot(); }
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         iconImage.raycastTarget = false;
