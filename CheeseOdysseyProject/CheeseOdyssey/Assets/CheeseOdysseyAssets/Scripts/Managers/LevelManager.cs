@@ -1,6 +1,5 @@
 using NicoUtilities;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,19 +17,8 @@ public abstract class LevelManager : Singleton<LevelManager>
     public virtual void StartScene()
     {
         currentPanelOpened = CurrentPanelOpened.None;
-        //Retrieves saves data from the GameManager
-        //Sets it into the Mousecontroller Inventory
-        //Sets the inventory data into the InventoryUI
-        //PlaceHolder data:
-        /* Testing Data
-        List<InventoryItemData> testInventory = new List<InventoryItemData>()
-        {
-            //new InventoryItemData( new ItemData(ItemID.JetpackBasic, 1, true), SlotSavedType.Equipped, 1),
-            //new InventoryItemData( new ItemData(ItemID.Scrap, 10, false), SlotSavedType.Inventory, 0),
-            //new InventoryItemData( new ItemData(ItemID.HelmetOrange, 1, false), SlotSavedType.Inventory, 3),
-        };
-        UIManager.Instance.SetupInventoryItems(testInventory);
-        */
+        MouseController.Instance.InventoryController.SetupInventory(GameManager.Instance.GameData.inventory);
+        UIManager.Instance.SetupInventoryItems(GameManager.Instance.GameData.inventory);
     }
     public void ShowInventory(bool stateOn)
     {
@@ -50,6 +38,7 @@ public abstract class LevelManager : Singleton<LevelManager>
         {
             GameManager.Instance.ResumeTime();
             UIManager.Instance.CloseInventory();
+            GameManager.Instance.SaveGame();
             MouseController.Instance.SwitchActionMap(MouseController.InputMaps.Gameplay);
             currentPanelOpened = CurrentPanelOpened.None;
         }
@@ -81,6 +70,7 @@ public abstract class LevelManager : Singleton<LevelManager>
         {
             GameManager.Instance.ResumeTime();
             UIManager.Instance.CloseShop();
+            GameManager.Instance.SaveGame();
             MouseController.Instance.SwitchActionMap(MouseController.InputMaps.Gameplay);
             currentPanelOpened = CurrentPanelOpened.None;
         }

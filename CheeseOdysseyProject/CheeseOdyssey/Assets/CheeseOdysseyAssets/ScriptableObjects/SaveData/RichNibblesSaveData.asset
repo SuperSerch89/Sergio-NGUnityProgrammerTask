@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e4188f40cebba498edd0e4b0566232, type: 3}
+  m_Name: RichNibblesSaveData
+  m_EditorClassIdentifier: 
+  gameData:
+    inventory:
+    - itemData:
+        itemID: 1
+        quantity: 100
+      savedSlotType: 0
+      slotUsed: 0
+    - itemData:
+        itemID: 2
+        quantity: 100
+      savedSlotType: 0
+      slotUsed: 1
+    - itemData:
+        itemID: 3
+        quantity: 100
+      savedSlotType: 0
+      slotUsed: 2
+    - itemData:
+        itemID: 4
+        quantity: 100
+      savedSlotType: 0
+      slotUsed: 3

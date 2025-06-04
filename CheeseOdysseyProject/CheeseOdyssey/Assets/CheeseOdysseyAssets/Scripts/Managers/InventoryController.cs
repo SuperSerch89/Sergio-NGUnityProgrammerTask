@@ -5,6 +5,7 @@ public class InventoryController : MonoBehaviour
 {
     [SerializeField] private List<InventoryItemData> inventory = new List<InventoryItemData>();
 
+    public void SetupInventory(List<InventoryItemData> newInventory) => inventory = newInventory;
     public void AddItem(ItemData addedItem)
     {
         InventoryItemData foundItemInInventory = inventory.Find(inventoryItem => inventoryItem.itemData.itemID == addedItem.itemID);

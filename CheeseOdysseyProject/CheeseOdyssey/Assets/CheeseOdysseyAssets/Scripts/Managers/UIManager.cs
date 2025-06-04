@@ -262,7 +262,10 @@ public class UIManager : Singleton<UIManager>
         SetupShop(selectedShopProductsData);
     }
     #endregion
+    #region Tooltip Methods
     public void ShowTooltip(bool state, string itemName = "") => tooltip.Show(state, itemName);
+    #endregion
+    #region Utilities
     private Item FindItemSO(ItemID itemIDSearched)
     {
         Item itemSO = allItems.Find(itemSO => itemSO.itemID == itemIDSearched);
@@ -273,6 +276,7 @@ public class UIManager : Singleton<UIManager>
         }
         return itemSO;
     }
+    #endregion
     #region Coroutines
     private IEnumerator DialogueCoroutine()
     {

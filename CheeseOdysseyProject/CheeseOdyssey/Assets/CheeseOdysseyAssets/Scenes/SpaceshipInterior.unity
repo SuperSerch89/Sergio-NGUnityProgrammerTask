@@ -2501,10 +2501,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b89834aabfb2842963b225d426c3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newFileGameData: {fileID: 11400000, guid: fdad085d5b93b0740822690443ceab5f, type: 2}
+  saveFilePath: 
   gameData:
     inventory: []
-    catShopInventory:
-      shopCraftableItems: []
 --- !u!4 &695247930
 Transform:
   m_ObjectHideFlags: 0

@@ -101,12 +101,6 @@ public class MouseController : Singleton<MouseController>
         animator.SetBool(runningBooleanHash, isMoving);
     }
     #endregion
-    #region Inventory Controller
-    public void AddItem(ItemData addedItem)
-    {
-        inventoryController.AddItem(addedItem);
-    }
-    #endregion
     #region PlayerInput
     public void OnMove(InputAction.CallbackContext context)
     {

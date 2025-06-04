@@ -9,7 +9,7 @@ public class PickableItem : MonoBehaviour, IPickableItem
     private void Awake() => textMeshPro.text = $"x{itemData.quantity}";
     public void OnPickUp()
     {
-        if (itemData.quantity > 0) { MouseController.Instance.AddItem(itemData); }
+        if (itemData.quantity > 0) { MouseController.Instance.InventoryController.AddItem(itemData); }
         Destroy(gameObject);
     }
 }
