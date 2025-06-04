@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library:
-  - m_Name: Helmets
-    m_Hash: 729569956
+  - m_Name: Helmet
+    m_Hash: 1023863696
     m_CategoryList: []
     m_OverrideEntries:
     - m_Name: Orange
@@ -32,8 +32,8 @@ MonoBehaviour:
       m_Sprite: {fileID: 407975454, guid: f5f60c2849572fc42afe65184524a59d, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 407975454, guid: f5f60c2849572fc42afe65184524a59d, type: 3}
-    - m_Name: Sky
-      m_Hash: 1047212559
+    - m_Name: Blue
+      m_Hash: 1040475530
       m_Sprite: {fileID: 1351139985, guid: f5f60c2849572fc42afe65184524a59d, type: 3}
       m_FromMain: 0
       m_SpriteOverride: {fileID: 1351139985, guid: f5f60c2849572fc42afe65184524a59d, type: 3}
@@ -44,8 +44,8 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 0}
     m_FromMain: 0
     m_EntryOverrideCount: 5
-  - m_Name: Jetpacks
-    m_Hash: 731822819
+  - m_Name: Jetpack
+    m_Hash: 535211152
     m_CategoryList: []
     m_OverrideEntries:
     - m_Name: Basic
@@ -66,5 +66,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 3
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638844821788787552
+  m_ModificationHash: 638846166988408664
   m_Version: 1

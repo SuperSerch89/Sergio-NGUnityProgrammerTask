@@ -214,6 +214,29 @@ MonoBehaviour:
   animator: {fileID: 7682067718326506236}
   runningBoolean: Running
   helmetTransform: {fileID: 2002006833511412724}
+  equipmentResolvers:
+  - spriteResolver: {fileID: 7322653447197936103}
+    itemType: 1
+    labels:
+    - itemID: 0
+      label: 0
+    - itemID: 200
+      label: 1
+    - itemID: 201
+      label: 2
+    - itemID: 202
+      label: 3
+    - itemID: 203
+      label: 4
+  - spriteResolver: {fileID: 5171967837027794298}
+    itemType: 2
+    labels:
+    - itemID: 0
+      label: 0
+    - itemID: 100
+      label: 5
+    - itemID: 101
+      label: 6
   interactableDetector: {fileID: 1642858309762912037}
 --- !u!114 &6011637729518341502
 MonoBehaviour:
@@ -661,10 +684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CategoryHash: 8.9654174e-13
+  m_CategoryHash: 0.032939494
   m_labelHash: 2.977024e-14
   m_SpriteKey: 0
-  m_SpriteHash: 391010987
+  m_SpriteHash: 404666894
 --- !u!114 &1929064376990359875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +1000,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.02, y: 7.02}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -995,10 +1018,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CategoryHash: 1.1278447e-12
+  m_CategoryHash: 9.769427e-20
   m_labelHash: 2.977024e-14
   m_SpriteKey: 0
-  m_SpriteHash: 296824339
+  m_SpriteHash: 248806305
 --- !u!114 &8189466273273409870
 MonoBehaviour:
   m_ObjectHideFlags: 0

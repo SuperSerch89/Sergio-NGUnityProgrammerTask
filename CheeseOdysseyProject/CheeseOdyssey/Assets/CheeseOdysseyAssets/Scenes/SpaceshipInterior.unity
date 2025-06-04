@@ -743,6 +743,7 @@ MonoBehaviour:
   slotId: 0
   description: {fileID: 715591895}
   emptySlotDescrition: EMPTY
+  defaultItemType: 1
 --- !u!114 &311525597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b89834aabfb2842963b225d426c3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newFileGameData: {fileID: 11400000, guid: fdad085d5b93b0740822690443ceab5f, type: 2}
+  newFileGameData: {fileID: 11400000, guid: ac1788fed9b2ef640b0bc9a7f16ad4a7, type: 2}
   saveFilePath: 
   gameData:
     inventory: []
@@ -3022,8 +3023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa11bb0a91b509468341f3bf88cd98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 341461174}
-  inventoryItemPrefab: {fileID: 5410361526256840902, guid: 94b36ad313a74db4783d5a9bb8c6ef15, type: 3}
   allItems:
   - {fileID: 11400000, guid: 57131ab01666c44438ac666cc1340838, type: 2}
   - {fileID: 11400000, guid: 605e380228a2fc24083c756419ce7614, type: 2}
@@ -3035,6 +3034,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2fd10eeff4a80a144857ffcf2a72f2c4, type: 2}
   - {fileID: 11400000, guid: 2d4a89f1d611ef2499ece95b14ce9000, type: 2}
   - {fileID: 11400000, guid: 93357da7be902204991190a35f5a8960, type: 2}
+  inventoryPanel: {fileID: 341461174}
+  inventoryItemPrefab: {fileID: 5410361526256840902, guid: 94b36ad313a74db4783d5a9bb8c6ef15, type: 3}
   tooltip: {fileID: 574733785}
   dialoguesAnimator: {fileID: 646628561}
   dialogueNameLabel: {fileID: 577475089}
@@ -3394,6 +3395,7 @@ MonoBehaviour:
   slotId: 1
   description: {fileID: 1299929625}
   emptySlotDescrition: EMPTY
+  defaultItemType: 1
 --- !u!114 &990929892
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,10 +10,10 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     #region Serialized Fields
+    [SerializeField] private List<Item> allItems = null;
     [Header("Inventory")]
     [SerializeField] private GameObject inventoryPanel = null;
     [SerializeField] private GameObject inventoryItemPrefab = null;
-    [SerializeField] private List<Item> allItems = null;
     [SerializeField] private Tooltip tooltip = null;
     [Header("Dialogues")]
     [SerializeField] private Animator dialoguesAnimator = null;
@@ -139,6 +139,10 @@ public class UIManager : Singleton<UIManager>
         if (freeSlot.Value != null) { return freeSlot.Key; }
         Debug.LogWarning("No free inventory slots available.");
         return -1;
+    }
+    public void ChangedSlotEquipment(ItemType itemType, ItemID itemID)
+    {
+        LevelManager.Instance.NibblesEquipmentChange(itemType, itemID);
     }
     #endregion
     #region Dialogue Methods

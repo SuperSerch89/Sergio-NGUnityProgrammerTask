@@ -1,6 +1,9 @@
 using NicoUtilities;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D.Animation;
 
 public class MouseController : Singleton<MouseController>
 {
@@ -16,6 +19,7 @@ public class MouseController : Singleton<MouseController>
     [SerializeField] private Animator animator = null;
     [SerializeField] private string runningBoolean = "Running";
     [SerializeField] private Transform helmetTransform;
+    [SerializeField] private List<EquipmentResolver> equipmentResolvers = new List<EquipmentResolver>();
     [Header("Interactions")]
     [SerializeField] private InteractableDetector interactableDetector = null;
     #endregion
@@ -100,6 +104,22 @@ public class MouseController : Singleton<MouseController>
     {
         animator.SetBool(runningBooleanHash, isMoving);
     }
+    public void ChangeEquipment(ItemType itemType, ItemID itemID)
+    {
+        EquipmentResolver equipmentFound = equipmentResolvers.FirstOrDefault(resolver => resolver.itemType == itemType);
+        if (equipmentFound == null) 
+        {
+            Debug.LogError($"Couldn't find equipment resolver with type {itemType}");
+            return;
+        }
+        ItemLabel labelFound = equipmentFound.labels.FirstOrDefault(itemLabel => itemLabel.itemID == itemID);
+        if (labelFound == null)
+        {
+            Debug.LogError($"Couldn't find equipment item label with itemID {itemID}");
+            return;
+        }
+        equipmentFound.spriteResolver.SetCategoryAndLabel(equipmentFound.itemType.ToString(), labelFound.label.ToString());
+    }
     #endregion
     #region PlayerInput
     public void OnMove(InputAction.CallbackContext context)
@@ -134,5 +154,24 @@ public class MouseController : Singleton<MouseController>
     #region Enums
     private enum MovementMode { Normal, Jetpack }
     public enum InputMaps { Gameplay, UI}
+    public enum EquippableLabel
+    {
+        Empty = 0,
+        Blue, Orange, Pink, Purple,
+        Basic, Improved,
+    }
     #endregion
+    [System.Serializable]
+    public class EquipmentResolver
+    {
+        public SpriteResolver spriteResolver = null;
+        public ItemType itemType = ItemType.Helmet;
+        public List<ItemLabel> labels = new List<ItemLabel>();
+    }
+    [System.Serializable]
+    public class ItemLabel
+    {
+        public ItemID itemID = ItemID.Empty;
+        public EquippableLabel label = EquippableLabel.Basic;
+    }
 }

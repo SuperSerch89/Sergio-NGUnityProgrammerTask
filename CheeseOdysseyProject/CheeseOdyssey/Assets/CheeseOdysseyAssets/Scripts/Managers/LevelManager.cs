@@ -76,6 +76,7 @@ public abstract class LevelManager : Singleton<LevelManager>
         }
     }
     public InventoryController GetNibblesInventory() => MouseController.Instance.InventoryController;
+    public void NibblesEquipmentChange(ItemType itemType, ItemID itemID) => MouseController.Instance.ChangeEquipment(itemType, itemID);
     #endregion
     #region Coroutines
     private IEnumerator OpeningDelayRountine()
