@@ -24,6 +24,7 @@ public abstract class LevelManager : Singleton<LevelManager>
         UIManager.Instance.SetupInventoryItems(GameManager.Instance.GameData.inventory);
         OnSceneStarted?.Invoke();
     }
+    public virtual void PlaySFX(SFX sfxToPlay) { }
     public void ShowInventory(bool stateOn)
     {
         if (stateOn && currentPanelOpened != CurrentPanelOpened.None) { return; }

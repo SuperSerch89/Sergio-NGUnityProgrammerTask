@@ -126,12 +126,14 @@ public class UIManager : Singleton<UIManager>
     public void OpenInventory()
     {
         inventoryPanel.SetActive(true);
+        LevelManager.Instance.PlaySFX(SFX.grab);
     }
     public void CloseInventory()
     {
         inventoryPanel.SetActive(false);
         LevelManager.Instance.ShowInventory(false);
         ShowTooltip(false);
+        LevelManager.Instance.PlaySFX(SFX.drop);
     }
     public int GetFreeSlot()
     {
@@ -180,6 +182,7 @@ public class UIManager : Singleton<UIManager>
         ShopClosedCallback = OnShopClosed;
         SetupShop(shopProductsData);
         shopPanel.SetActive(true);
+        LevelManager.Instance.PlaySFX(SFX.grab);
     }
     public void CloseShop()
     {
@@ -187,6 +190,7 @@ public class UIManager : Singleton<UIManager>
         LevelManager.Instance.ShowShop(false);
         ShowTooltip(false);
         ShopClosedCallback?.Invoke();
+        LevelManager.Instance.PlaySFX(SFX.drop);
     }
     private void SetupShop(ShopDataSO shopProductsData)
     {
@@ -210,6 +214,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void ShowSelectedProductDetails(Item itemToShow)
     {
+        LevelManager.Instance.PlaySFX(SFX.button);
         selectedItem = itemToShow;
         productNameLabel.text = itemToShow.itemName;
         productIconLabel.sprite = itemToShow.icon;
@@ -236,6 +241,7 @@ public class UIManager : Singleton<UIManager>
             int nibblesHeldComponentQuantity = nibblesInventory.GetItemQuantity(itemSO.itemID);
             storeItemComponents[i].Setup(selectedProduct.requiredMaterials[i], itemSO.icon, nibblesHeldComponentQuantity);
         }
+        LevelManager.Instance.PlaySFX(SFX.button);
     }
     public void TryCrafting()
     {
@@ -255,6 +261,7 @@ public class UIManager : Singleton<UIManager>
         if (!craftAvailable)
         {
             craftFailedPanel.SetActive(true);
+            LevelManager.Instance.PlaySFX(SFX.drop);
             return;
         }
         craftSuccessPanel.SetActive(true);
@@ -264,6 +271,7 @@ public class UIManager : Singleton<UIManager>
         }
         nibblesInventory.AddItem(selectedProduct.itemData);
         SetupShop(selectedShopProductsData);
+        LevelManager.Instance.PlaySFX(SFX.grab);
     }
     #endregion
     #region Tooltip Methods

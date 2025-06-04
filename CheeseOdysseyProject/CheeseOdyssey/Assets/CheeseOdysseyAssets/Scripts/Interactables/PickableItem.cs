@@ -4,7 +4,6 @@ using UnityEngine;
 public class PickableItem : MonoBehaviour, IPickableItem
 {
     [SerializeField] private ItemData itemData = null;
-    [SerializeField] private TextMeshPro textMeshPro = null;
     [SerializeField] private bool saveCollected = false;
     [SerializeField] private bool floatAnimate = false;
     [SerializeField] private string floatingBool = "float";
@@ -12,7 +11,6 @@ public class PickableItem : MonoBehaviour, IPickableItem
 
     private void Awake()
     {
-        textMeshPro.text = $"x{itemData.quantity}";
         if (saveCollected) { LevelManager.Instance.OnSceneStarted += CheckItemCollected; }
         animator = GetComponent<Animator>();
         if (floatAnimate) { animator.SetBool(floatingBool, true); }
@@ -25,6 +23,7 @@ public class PickableItem : MonoBehaviour, IPickableItem
     public void OnPickUp()
     {
         if (itemData.quantity > 0) { MouseController.Instance.InventoryController.AddItem(itemData); }
+        LevelManager.Instance.PlaySFX(SFX.grab);
         Destroy(gameObject);
     }
 }

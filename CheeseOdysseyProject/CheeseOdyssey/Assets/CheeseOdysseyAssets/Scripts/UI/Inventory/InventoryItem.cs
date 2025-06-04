@@ -29,6 +29,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         iconImage.raycastTarget = false;
+        LevelManager.Instance.PlaySFX(SFX.grab);
     }
     public void OnDrag(PointerEventData eventData) => transform.position = Input.mousePosition;
     public void OnEndDrag(PointerEventData eventData)
@@ -37,6 +38,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.localPosition = Vector3.zero;
         iconImage.raycastTarget = true;
         rect.localScale = Vector3.one;
+        LevelManager.Instance.PlaySFX(SFX.drop);
     }
     public void OnPointerEnter(PointerEventData eventData) => UIManager.Instance.ShowTooltip(true, itemSO.itemName);
     public void OnPointerExit(PointerEventData eventData) => UIManager.Instance.ShowTooltip(false);

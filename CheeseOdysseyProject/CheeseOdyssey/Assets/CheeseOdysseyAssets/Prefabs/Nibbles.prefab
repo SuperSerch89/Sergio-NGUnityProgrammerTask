@@ -208,7 +208,7 @@ MonoBehaviour:
   currentMode: 0
   normalSpeed: 5
   moveInput: {x: 0, y: 0}
-  jetpackForce: 2
+  jetpackForce: 3
   maxJetpackSpeed: 3
   playerArtRenderer: {fileID: 1727003240419949633}
   animator: {fileID: 7682067718326506236}
